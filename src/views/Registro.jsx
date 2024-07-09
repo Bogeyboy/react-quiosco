@@ -65,6 +65,7 @@ export default function Registro() {
                             placeholder="Repetir password"
                         />
                     </div>
+                    {/* Botón para crear cuenta */}
                     <input
                         type="submit"
                         value="Crear cuenta"
