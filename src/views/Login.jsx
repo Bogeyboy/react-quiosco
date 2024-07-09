@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Login() {
     return (
         <>{/* Esto es un fragment, una manera de no añadir html extra al código */}
@@ -42,6 +44,11 @@ export default function Login() {
                         />
                 </form>
             </div>
+            <nav className="mt-5">
+                <Link to="/auth/registro">
+                    ¿No tienes cuenta? Crea una.
+                </Link>
+            </nav>
         </>
     )
 }
