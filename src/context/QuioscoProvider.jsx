@@ -4,9 +4,7 @@ const QuioscoContext = createContext();
 
 const QuioscoProvider = ({children}) => {
     
-    const hola = () =>{
-
-    }
+    const hola = 25
     
     return (
         <QuioscoContext.Provider
