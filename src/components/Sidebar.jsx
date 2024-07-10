@@ -17,11 +17,13 @@ export default function Sidebar() {
             <div className="mt-10">
                 {categorias.map(categoria => (
                     <Categoria
+                        key={categoria.id}
                         categoria={categoria}  //Estamos pasando este prop como JS
                     />
                 ))}
             </div>
 
+            {/* Botón de cancelación de orden y cierre de sesión */}
             <div className="my-5 px-5">
                 <button
                     type="button"
