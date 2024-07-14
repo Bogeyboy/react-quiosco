@@ -15,7 +15,7 @@ export default function Categoria({categoria}) {
             <button
                 className="text-lg font-bold cursor truncate"
                 type="buttron"
-                onClick={handleClickCategoria}
+                onClick={() => handleClickCategoria(id)}
             >
                 {nombre}
             </button>

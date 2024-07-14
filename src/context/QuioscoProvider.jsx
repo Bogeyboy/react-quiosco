@@ -9,8 +9,9 @@ const QuioscoProvider = ({children}) => {
     const [categoriaActual, setCategoriaActual] = useState(categorias[0]);
 
     //Cuando hay un evento, se somienza con handle seguido del nombre del evento y después lo que va a cambiar
-    const handleClickCategoria = () => {
-        console.log('Click en categoria');
+    const handleClickCategoria = id => {
+        const categoria = categorias.filter(categoria => categoria.id === id)[0];
+        setCategoriaActual(categoria);
     }
 
     return (
