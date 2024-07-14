@@ -4,14 +4,12 @@ import useQuiosco from "../hooks/useQuiosco";
 
 export default function Inicio() {
     
-    const {hola} = useQuiosco();
-
-    console.log(hola);
+    const {categoriaActual} = useQuiosco();
 
     return (
         <>
             <h1 className="text-4xl font-black">
-                Inicio
+                {categoriaActual.nombre}
             </h1>
             <p className="text-2xl my-10">
                 Elige y personaliza tu pedido a continuación
