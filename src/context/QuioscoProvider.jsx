@@ -25,8 +25,14 @@ const QuioscoProvider = ({children}) => {
         setProducto(producto);
     }
 
-    const handleAgregarPedido = ({categoria_id,imagen,...producto}) => {
-        setPedido([...pedido,producto]);
+    const handleAgregarPedido = ({categoria_id, imagen, ...producto}) => {
+
+        if(pedido.some( pedidoState => pedidoState.id === producto.id)) {
+            const pedidoActualizado = pedido.map(pedidoState => pedidoState.id === producto.id ? producto : pedidoState);
+            setPedido(pedidoActualizado);
+        } else {
+            setPedido([...pedido,producto]);
+        }
     }
 
     return (
