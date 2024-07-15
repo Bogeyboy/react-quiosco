@@ -1,4 +1,5 @@
 import { createContext, useState } from "react"
+import { toast, Zoom } from "react-toastify";
 import { categorias as categoriasDB} from "../data/categorias"
 
 const QuioscoContext = createContext();
@@ -30,8 +31,30 @@ const QuioscoProvider = ({children}) => {
         if(pedido.some( pedidoState => pedidoState.id === producto.id)) {
             const pedidoActualizado = pedido.map(pedidoState => pedidoState.id === producto.id ? producto : pedidoState);
             setPedido(pedidoActualizado);
+            toast.success('Pedido actualizado correctamente',{
+                position: "top-right",
+                autoClose: 3000,
+                /* hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined, */
+                theme: "colored",
+                transition: Zoom,
+            });
         } else {
             setPedido([...pedido,producto]);
+            toast.success('Agregado correctamente al pedido',{
+                position: "top-right",
+                autoClose: 2500,
+                /* hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined, */
+                theme: "colored",
+                transition: Zoom,
+            });
         }
     }
 
