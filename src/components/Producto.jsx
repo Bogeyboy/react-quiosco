@@ -25,7 +25,7 @@ export default function Producto({producto}) {
                     type="button"
                     className="bg-indigo-500 hover:bg-indigo-700 text-white w-full mt-5 p-3
                         uppercase font-bold rounded-lg"
-                    onClick={()=>{
+                    onClick={()=>{//Se pasa de esta manera el evento para poder enviarle información a la ventana emergente
                         handleClickModal();
                     }}
                 >
