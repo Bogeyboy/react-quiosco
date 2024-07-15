@@ -8,6 +8,8 @@ const QuioscoProvider = ({children}) => {
     const [categorias, setCategorias] = useState(categoriasDB);
     const [categoriaActual, setCategoriaActual] = useState(categorias[0]);
     const [modal, setModal] = useState(false);
+    const [producto, setProducto] = useState({});
+
 
     //Cuando hay un evento, se somienza con handle seguido del nombre del evento y después lo que va a cambiar
     const handleClickCategoria = id => {
@@ -18,6 +20,9 @@ const QuioscoProvider = ({children}) => {
     const handleClickModal = () => {
         setModal(!modal);
     }
+    const handleSetProducto = producto => {
+        setProducto(producto);
+    }
 
     return (
         <QuioscoContext.Provider
@@ -26,7 +31,9 @@ const QuioscoProvider = ({children}) => {
                 categoriaActual,
                 handleClickCategoria,
                 modal,
-                handleClickModal
+                handleClickModal,
+                producto,
+                handleSetProducto
             }}
         >{children}</QuioscoContext.Provider>
     )

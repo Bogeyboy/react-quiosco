@@ -4,7 +4,7 @@ import useQuiosco from "../hooks/useQuiosco";
 export default function Producto({producto}) {
     
     
-    const {handleClickModal} = useQuiosco();
+    const {handleClickModal,handleSetProducto} = useQuiosco();
     const {nombre,imagen,precio} = producto;
 
     return (
@@ -27,6 +27,7 @@ export default function Producto({producto}) {
                         uppercase font-bold rounded-lg"
                     onClick={()=>{//Se pasa de esta manera el evento para poder enviarle información a la ventana emergente
                         handleClickModal();
+                        handleSetProducto(producto);
                     }}
                 >
                     Agregar al pedido
