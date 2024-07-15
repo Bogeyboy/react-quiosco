@@ -9,6 +9,7 @@ const QuioscoProvider = ({children}) => {
     const [categoriaActual, setCategoriaActual] = useState(categorias[0]);
     const [modal, setModal] = useState(false);
     const [producto, setProducto] = useState({});
+    const [pedido, setPedido] = useState([]);
 
 
     //Cuando hay un evento, se somienza con handle seguido del nombre del evento y después lo que va a cambiar
@@ -33,7 +34,8 @@ const QuioscoProvider = ({children}) => {
                 modal,
                 handleClickModal,
                 producto,
-                handleSetProducto
+                handleSetProducto,
+                pedido
             }}
         >{children}</QuioscoContext.Provider>
     )
