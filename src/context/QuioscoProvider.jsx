@@ -47,11 +47,6 @@ const QuioscoProvider = ({children}) => {
             toast.success('Agregado correctamente al pedido',{
                 position: "top-right",
                 autoClose: 2500,
-                /* hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined, */
                 theme: "colored",
                 transition: Zoom,
             });
@@ -63,6 +58,17 @@ const QuioscoProvider = ({children}) => {
         setProducto(productoActualizar);
         setModal(!modal);
     };
+
+    const handleEliminarProductoPedido = id => {
+        const pedidoActualizado = pedido.filter(producto => producto.id !== id);
+        setPedido(pedidoActualizado);
+        toast.success('Producto eliminado correctamente del pedido.',{
+                position: "top-right",
+                autoClose: 2500,
+                theme: "colored",
+                transition: Zoom,
+            });
+    }
 
     return (
         <QuioscoContext.Provider
@@ -76,7 +82,8 @@ const QuioscoProvider = ({children}) => {
                 handleSetProducto,
                 pedido,
                 handleAgregarPedido,
-                handleEditarCantidad
+                handleEditarCantidad,
+                handleEliminarProductoPedido
             }}
         >{children}</QuioscoContext.Provider>
     )
