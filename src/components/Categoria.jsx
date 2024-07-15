@@ -7,7 +7,8 @@ export default function Categoria({categoria}) {
     const resaltarCategoriaActual = () => categoriaActual.id === id ? 'bg-amber-400' : 'bg-white';
 
     return (
-        <div className={`${resaltarCategoriaActual()} flex items-center gap-4 border w-full p-3 hover:bg-amber-400 cursor-pointer`}>
+        <div className={`${resaltarCategoriaActual()} flex items-center gap-4 border w-full p-3 hover:bg-amber-400 cursor-pointer`}
+            onClick={() => handleClickCategoria(id)}>
             <img
                 src={`/img/icono_${icono}.svg`}
                 alt="Imagen Icono"
@@ -16,7 +17,7 @@ export default function Categoria({categoria}) {
             <button
                 className="text-lg font-bold cursor truncate"
                 type="buttron"
-                onClick={() => handleClickCategoria(id)}
+                /* onClick={() => handleClickCategoria(id)} */
             >
                 {nombre}
             </button>
