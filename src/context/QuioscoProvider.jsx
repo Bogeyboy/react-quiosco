@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useEffect } from "react"
 import { toast, Zoom } from "react-toastify";
 import { categorias as categoriasDB} from "../data/categorias"
 
@@ -11,7 +11,12 @@ const QuioscoProvider = ({children}) => {
     const [modal, setModal] = useState(false);
     const [producto, setProducto] = useState({});
     const [pedido, setPedido] = useState([]);
+    const [total, setTotal] = useState(0);
 
+    useEffect(() => {
+        const nuevoTotal = pedido.reduce( (total,producto) => (producto.precio * producto.cantidad) + total, 0)
+        setTotal(nuevoTotal);
+    },[pedido])
 
     //Cuando hay un evento, se somienza con handle seguido del nombre del evento y después lo que va a cambiar
     const handleClickCategoria = id => {
@@ -34,11 +39,6 @@ const QuioscoProvider = ({children}) => {
             toast.success('Pedido actualizado correctamente',{
                 position: "top-right",
                 autoClose: 3000,
-                /* hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined, */
                 theme: "colored",
                 transition: Zoom,
             });
@@ -83,7 +83,8 @@ const QuioscoProvider = ({children}) => {
                 pedido,
                 handleAgregarPedido,
                 handleEditarCantidad,
-                handleEliminarProductoPedido
+                handleEliminarProductoPedido,
+                total
             }}
         >{children}</QuioscoContext.Provider>
     )

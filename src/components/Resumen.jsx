@@ -1,8 +1,9 @@
 import useQuiosco from "../hooks/useQuiosco";
 import ResumenProducto from "./ResumenProducto";
+import {formatearDinero} from "../helpers";
 
 export default function Resumen() {
-    const {pedido} = useQuiosco();
+    const {pedido, total} = useQuiosco();
     return (
         <aside className="w-72 h-screen overflow-y-scroll p-5">
             <h1 className="text-3xl font-black">
@@ -27,6 +28,7 @@ export default function Resumen() {
             </div>
             <p className="text-xl mt-10">
                 Total a pagar: {''}
+                {formatearDinero(total)}
             </p>
             <form className="w-full">
                 <div className="mt-5">
