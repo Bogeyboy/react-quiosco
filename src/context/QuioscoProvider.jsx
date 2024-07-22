@@ -1,13 +1,16 @@
 import { createContext, useState, useEffect } from "react"
 import { toast, Zoom } from "react-toastify";
-import { categorias as categoriasDB} from "../data/categorias"
+//import { categorias as categoriasDB} from "../data/categorias";
+import clienteAxios from "../config/axios";
 
 const QuioscoContext = createContext();
 
 const QuioscoProvider = ({children}) => {
     
-    const [categorias, setCategorias] = useState(categoriasDB);
-    const [categoriaActual, setCategoriaActual] = useState(categorias[0]);
+    //const [categorias, setCategorias] = useState(categoriasDB);
+    const [categorias, setCategorias] = useState([]);
+    //const [categoriaActual, setCategoriaActual] = useState(categorias[0]);
+    const [categoriaActual, setCategoriaActual] = useState({});
     const [modal, setModal] = useState(false);
     const [producto, setProducto] = useState({});
     const [pedido, setPedido] = useState([]);
@@ -17,6 +20,24 @@ const QuioscoProvider = ({children}) => {
         const nuevoTotal = pedido.reduce( (total,producto) => (producto.precio * producto.cantidad) + total, 0)
         setTotal(nuevoTotal);
     },[pedido])
+
+    const obtenerCategorias = async () => {
+        try {
+            /* const respuesta = await axios('http://localhost:8000/api/categorias');
+            console.log(respuesta); */
+            //const varenv = import.meta.env.VITE_API_URL;
+            //const {data} = await axios('http://localhost:8000/api/categorias');
+            const {data} = await clienteAxios('/api/categorias');
+            //const {data} = await axios(`${/* import.meta.env.VITE_API_URL */varenv}/api/categorias`);
+            setCategorias(data.data);
+            setCategoriaActual(data.data[0]);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        obtenerCategorias();
+    },[])
 
     //Cuando hay un evento, se somienza con handle seguido del nombre del evento y después lo que va a cambiar
     const handleClickCategoria = id => {
