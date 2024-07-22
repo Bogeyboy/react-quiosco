@@ -14,7 +14,9 @@ export default function Inicio() {
     }); */
     
     const fetcher = () => clienteAxios('/api/productos').then(data => data.data);
-    const { data, error, isLoading } = useSWR('/api/productos', fetcher)
+    const { data, error, isLoading } = useSWR('/api/productos', fetcher,{
+        refreshInterval: 1000,
+    })
 
     /* console.log(data);
     console.log(error);
