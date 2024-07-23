@@ -35,6 +35,7 @@ export default function Login() {
                     onSubmit={handleSubmit}
                     noValidate
                 >
+                    {errores ? errores.map((error,i) => <Alerta key={i}>{error}</Alerta>) : null}
                     {/* Email del usuario */}
                     <div className="mb-4">
                         <label
