@@ -34,13 +34,14 @@ export default function Registro() {
         <>{/* Esto es un fragment, una manera de no añadir html extra al código */}
             <h1 className="text-4xl font-black">Crea tu cuenta de usuario</h1>
             <p>Crea tu cuenta llenando el formulario</p>
+            
+            {/* Formulario de registro en la aplicación */}
             <div className="bg-whit shadow-md rounded-md mt-10 px-5 py-10">
                 <form
                     onSubmit={handleSubmit}
-                    noValidate
+                    noValidate //Se usa novalidate para que no se aplique la validación HTML
                 >
                     {errores ? errores.map((error,i) => <Alerta key={i}>{error}</Alerta>) : null}
-
                     {/* Nombre del usuario */}
                     <div className="mb-4">
                         <label
