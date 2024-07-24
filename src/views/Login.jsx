@@ -1,7 +1,7 @@
 import { createRef,useState } from 'react'
 import { Link } from 'react-router-dom'
 import Alerta from '../components/Alerta';
-import clienteAxios from '../config/axios'
+import { useAuth } from '../hooks/useAuth';
 
 export default function Login() {
 
@@ -9,6 +9,10 @@ export default function Login() {
     const passwordRef = createRef();
 
     const [errores, setErrores] = useState([]);
+    const { login } = useAuth({
+        middleware: 'guest',
+        url: '/'
+    });
     
     //Evento creado para cuando se envía el formulario
     const handleSubmit = async e => {
@@ -18,14 +22,7 @@ export default function Login() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }
-        try {
-            const {data} = await clienteAxios.post('/api/login', datos);
-            localStorage.setItem('AUTH_TOKEN', data.token);
-            setErrores([]);
-            //console.log(data.token);
-        } catch (error) {
-            setErrores(Object.values(error.response.data.errors));
-        }
+        login(datos,setErrores);
     }
 
     return (
