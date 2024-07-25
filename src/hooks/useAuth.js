@@ -20,9 +20,9 @@ export const useAuth = ({middleware, url}) => {
         
     }
 
-    return [
+    return {
         login,
         registro,
         logout
-    ]
+    }
 }
