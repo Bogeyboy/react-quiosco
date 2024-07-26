@@ -21,6 +21,7 @@ export const useAuth = ({middleware, url}) => {
         })
     );
     
+    /* Función para el login del usuario */
     const login = async (datos, setErrores) => {
         try {
             const {data} = await clienteAxios.post('/api/login', datos);
@@ -32,11 +33,20 @@ export const useAuth = ({middleware, url}) => {
         }
     }
     
-    const registro = () => {
-        
+    /* Función para el registro de usuarios */
+    const registro = async(datos,setErrores) => {
+        try {
+            const {data} = await clienteAxios.post('/api/registro', datos);
+            //console.log(data.token);
+            localStorage.setItem('AUTH_TOKEN',data.token);
+            setErrores([]);
+            await mutate();
+        } catch (error) {
+            setErrores(Object.values(error.response.data.errors));
+        }
     }
     
-    //Función para cerrar sesión
+    /* Función para cerrar sesión */
     const logout = async () => {
         try {
             await clienteAxios.post('/api/logout',null,{

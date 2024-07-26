@@ -6,7 +6,7 @@ export default function Sidebar() {
 
     const {categorias} = useQuiosco();
 
-    const {logout} = useAuth({middleware: 'auth'});
+    const {logout,user} = useAuth({middleware: 'auth'});
 
     return (
         <aside className="md:w-72">
@@ -18,7 +18,10 @@ export default function Sidebar() {
                     alt="Imagen Logotipo"
                 />
             </div>
-
+            {/* Nombre del usuario registrado */}
+            <p className="my-10 text-xl text-center font-bold bg-slate-200 rounded-full">
+                Hola: {user?.name}
+            </p>
             {/* Categorías de productos */}
             <div className="mt-10">
                 {categorias.map(categoria => (
