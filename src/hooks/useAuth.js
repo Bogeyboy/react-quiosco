@@ -36,12 +36,20 @@ export const useAuth = ({middleware, url}) => {
         
     }
     
-    const logout = () => {
-        
+    //Función para cerrar sesión
+    const logout = async () => {
+        try {
+            await clienteAxios.post('/api/logout',null,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            localStorage.removeItem('AUTH_TOKEN');
+            await mutate(undefined);
+        } catch (error) {
+            throw Error(error?.response?.data?.errors);
+        }
     }
-
-    /* console.log(user);
-    console.log(error); */
 
     useEffect(() => {
         if(middleware === 'guest' && url && user){
