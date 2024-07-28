@@ -97,7 +97,7 @@ const QuioscoProvider = ({children}) => {
         try {
             await clienteAxios.post('/api/pedidos',
                 {
-
+                    total,//Pasamos esta variable para que está disponible en la parte de Laravel
                 },
                 {
                     headers:{
