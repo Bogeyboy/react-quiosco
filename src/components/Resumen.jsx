@@ -3,9 +3,14 @@ import ResumenProducto from "./ResumenProducto";
 import {formatearDinero} from "../helpers";
 
 export default function Resumen() {
-    const {pedido, total} = useQuiosco();
+    const {pedido, total, handleSubmitNuevaOrden} = useQuiosco();
 
     const comprobarPedido = () => pedido.length === 0;
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        handleSubmitNuevaOrden();
+    };
 
     console.log(comprobarPedido());
 
@@ -17,6 +22,7 @@ export default function Resumen() {
             <p className="text-lg my-5">
                 Aquí verás el resúmen y total de tu pedido
             </p>
+            {/* Resúmen del pedido */}
             <div className="py-10">
                 {pedido.length === 0 ? (
                     <p className="text-center text-2xl">
@@ -36,7 +42,10 @@ export default function Resumen() {
                 {formatearDinero(total)}
             </p>
             {/* Botón de confirmar pedido */}
-            <form className="w-full">
+            <form
+                className="w-full"
+                onSubmit={handleSubmit}
+            >
                 <div className="mt-5">
                     <input 
                         type="submit"
