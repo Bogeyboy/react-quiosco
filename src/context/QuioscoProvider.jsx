@@ -97,7 +97,13 @@ const QuioscoProvider = ({children}) => {
         try {
             await clienteAxios.post('/api/pedidos',
                 {
-                    total,//Pasamos esta variable para que está disponible en la parte de Laravel
+                    total,//Pasamos estas variables para que está disponible en la parte de Laravel
+                    productos: pedido.map(producto => {
+                        return {
+                            id: producto.id,
+                            cantidad: producto.cantidad
+                        }
+                    })
                 },
                 {
                     headers:{
