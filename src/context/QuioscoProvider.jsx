@@ -91,11 +91,11 @@ const QuioscoProvider = ({children}) => {
             });
     }
 
-    const handleSubmitNuevaOrden = async () =>{
+    const handleSubmitNuevaOrden = async (logout) =>{
         
         const token = localStorage.getItem('AUTH_TOKEN');//Obtenemos el token de localStorage
         try {
-            await clienteAxios.post('/api/pedidos',
+            const {data} = await clienteAxios.post('/api/pedidos',
                 {
                     total,//Pasamos estas variables para que está disponible en la parte de Laravel
                     productos: pedido.map(producto => {
@@ -111,6 +111,15 @@ const QuioscoProvider = ({children}) => {
                     }
                 }
             );
+            toast.success(data.message);
+            setTimeout(() => {
+                setPedido([]);
+            },1000);
+            //Cerrando sesión del usuario
+            setTimeout(() => {
+                localStorage.removeItem('AUTH_TOKEN');
+                logout();
+            },1000);
         } catch (error) {
             console.log(error);
         }
