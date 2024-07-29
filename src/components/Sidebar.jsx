@@ -42,6 +42,6 @@ export default function Sidebar() {
                     Cancelar orden
                 </button>
             </div>
-        </aside>
+        </aside>    
     )
 }
