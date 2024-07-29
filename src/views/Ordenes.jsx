@@ -10,9 +10,9 @@ export default function Ordenes() {
             Authorization: `Bearer ${token}`
         }
     })
-    const {data, error, isLoading} =  useSWR('/api/pedidos', fetcher);
+    const {data, error, isLoading} =  useSWR('/api/pedidos', fetcher/* , {refreshInterval:1000} */);
 
-    console.log(data);
+    console.log(data?.data);
     console.log(error);
     console.log(isLoading);
 
