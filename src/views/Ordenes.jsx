@@ -1,6 +1,7 @@
 import useSWR from "swr";
 //import clienteAxios from '..config/axios';
 import clienteAxios from "../config/axios";
+import {formatearDinero} from "../helpers";
 
 export default function Ordenes() {
 
@@ -10,7 +11,7 @@ export default function Ordenes() {
             Authorization: `Bearer ${token}`
         }
     })
-    const {data, error, isLoading} =  useSWR('/api/pedidos', fetcher/* , {refreshInterval:1000} */);
+    const {data, error, isLoading} =  useSWR('/api/pedidos', fetcher, {refreshInterval:1000});
 
     if (isLoading) return 'Cargando las órdenes......'
     
@@ -25,14 +26,17 @@ export default function Ordenes() {
                 Administra las órdenes desde aquí
             </p>
             {/* Div en el que se mostrarán las órdenes */}
-            <div>
+            {/* <div className="grid grid-cols-3"> */}
+            <div className="grid grid-cols-2 gap-5">
+                {/* Mostrando los productos de los pedidos */}
                 {data.data.data.map(pedido => (
                     <div key={pedido.id} className="p-5 bg-white shawod space-y-2 border-b">
                         <p className="text-xl font-bold text-slate-600">
-                            Contenido del pedido: {pedido.id}
+                            Pedido número: {pedido.id}
                         </p>
 
                         {/* {if} */}
+                        
                         {pedido.productos.map(producto => (
                             <div
                                 key={producto.id}
@@ -52,6 +56,25 @@ export default function Ordenes() {
                                 </p>
                             </div>
                         ))}
+                        <p className="text-lg font-bold text-slate-600">
+                            Cliente: 
+                            <span className="font-normal">
+                                {''} {pedido.user.name}
+                            </span>
+                        </p>
+                        <p className="text-lg font-bold text-amber-600">
+                            Total a pagar: 
+                            <span className="font-normal text-slate-600">
+                                {''} {formatearDinero(pedido.total)}
+                            </span>
+                        </p>
+                        <button 
+                            type="button"
+                            className='bg-indigo-600 hover:bg-indigo-800 cursor-pointer
+                                px-5 py-2 uppercase rounded-lg font-bold text-white text-center w-full'
+                        >
+                            Completar orden
+                        </button>
                     </div>
                 ))}
             </div>
