@@ -4,7 +4,7 @@ import useQuiosco from "../hooks/useQuiosco";
 export default function Producto({producto, botonAgregar = false, botonDisponible = false}) {
     
     
-    const {handleClickModal,handleSetProducto} = useQuiosco();
+    const {handleClickModal,handleSetProducto,handleClickProductoAgotado} = useQuiosco();
     const {nombre,imagen,precio} = producto;
 
     return (
@@ -41,7 +41,7 @@ export default function Producto({producto, botonAgregar = false, botonDisponibl
                         type="button"
                         className="bg-indigo-500 hover:bg-indigo-700 text-white w-full mt-5 p-3
                             uppercase font-bold rounded-lg"
-                        onClick={()=>{}}//Se pasa de esta manera el evento para poder enviarle información a la ventana emergente
+                        onClick={()=>handleClickProductoAgotado(producto.id)}//Se pasa de esta manera el evento para poder enviarle información a la ventana emergente
                     >
                         Producto agotado
                     </button>
