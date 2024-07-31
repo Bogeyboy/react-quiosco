@@ -12,17 +12,9 @@ export default function Ordenes() {
             Authorization: `Bearer ${token}`
         }
     })
-<<<<<<< HEAD
     const {data, error, isLoading} =  useSWR('/api/pedidos', fetcher, {refreshInterval:1000});
 
     const {handleClickCompletarPedido} = useQuiosco();
-=======
-    const {data, error, isLoading} =  useSWR('/api/pedidos', fetcher/* , {refreshInterval:1000} */);
-
-    console.log(data?.data);
-    console.log(error);
-    console.log(isLoading);
->>>>>>> 58b10dd481c244e7d76f53679b295952b55f896d
 
     if (isLoading) return 'Cargando las órdenes......'
     

@@ -22,13 +22,13 @@ const QuioscoProvider = ({children}) => {
     },[pedido])
 
     const obtenerCategorias = async () => {
+        const token = localStorage.getItem('AUTH_TOKEN');
         try {
-            /* const respuesta = await axios('http://localhost:8000/api/categorias');
-            console.log(respuesta); */
-            //const varenv = import.meta.env.VITE_API_URL;
-            //const {data} = await axios('http://localhost:8000/api/categorias');
-            const {data} = await clienteAxios('/api/categorias');
-            //const {data} = await axios(`${/* import.meta.env.VITE_API_URL */varenv}/api/categorias`);
+            const {data} = await clienteAxios('/api/categorias', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             setCategorias(data.data);
             setCategoriaActual(data.data[0]);
         } catch (error) {
@@ -80,6 +80,7 @@ const QuioscoProvider = ({children}) => {
         setModal(!modal);
     };
 
+    /* Función para eliminar un producto de un pedido */
     const handleEliminarProductoPedido = id => {
         const pedidoActualizado = pedido.filter(producto => producto.id !== id);
         setPedido(pedidoActualizado);
@@ -91,6 +92,7 @@ const QuioscoProvider = ({children}) => {
             });
     }
 
+    /* Función para guardar una neuva orden */
     const handleSubmitNuevaOrden = async (logout) =>{
         
         const token = localStorage.getItem('AUTH_TOKEN');//Obtenemos el token de localStorage
